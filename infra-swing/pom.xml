@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>application</artifactId>
+    <artifactId>infra-swing</artifactId>
 
     <dependencies>
         <dependency>
@@ -18,28 +18,14 @@
             <version>1.0.0</version>
         </dependency>
         <dependency>
-            <groupId>io.github.danuser2018</groupId>
-            <artifactId>infra-swing</artifactId>
-            <version>1.0.0</version>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.4.1</version>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <skip>false</skip>
-                    <mainClass>io.github.danuser2018.picoauth.client.PicoAuthClientApplication</mainClass>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
