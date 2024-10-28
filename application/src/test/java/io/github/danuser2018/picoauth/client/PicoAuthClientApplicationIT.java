@@ -1,4 +1,4 @@
-package io.github.danuser2018.picoauth.client.application;
+package io.github.danuser2018.picoauth.client;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
