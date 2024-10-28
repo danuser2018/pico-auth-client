@@ -17,6 +17,10 @@
     <name>PicoAuth - Client</name>
     <description>An incredible little app to authorize</description>
 
+    <modules>
+        <module>application</module>
+    </modules>
+
     <packaging>pom</packaging>
 
     <properties>
