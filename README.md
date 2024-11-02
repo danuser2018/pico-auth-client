@@ -19,8 +19,6 @@ Actualmente, el proyecto se encuentra en desarrollo y no existe una versión est
 
 ## Reconocimiento
 
-1. [Smashicons](https://www.flaticon.es/iconos-gratis/perezoso). Por el icono del perezoso.
-
 ## Licencia
 
 MIT License
