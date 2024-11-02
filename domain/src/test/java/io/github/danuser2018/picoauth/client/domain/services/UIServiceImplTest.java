@@ -1,23 +1,17 @@
 package io.github.danuser2018.picoauth.client.domain.services;
 
 import io.github.danuser2018.picoauth.client.domain.ports.outbound.StartUIPort;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class UIServiceTest {
+public class UIServiceImplTest {
 
-    private UIService uiService;
     private final StartUIPort startUIPort = Mockito.mock();
-
-    @BeforeEach
-    void beforeTest() {
-        uiService = new UIService(startUIPort);
-    }
+    private final UIServiceImpl uiServiceImpl = new UIServiceImpl(startUIPort);
 
     @Test
     void testStartUI() {
-        uiService.startUI();
+        uiServiceImpl.startUI();
         Mockito.verify(startUIPort).startUI();
     }
 }

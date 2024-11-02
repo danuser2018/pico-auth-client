@@ -21,7 +21,7 @@ import static jiconfont.swing.IconFontSwing.buildImage;
 @Slf4j
 @Component
 @ConditionalOnBean(NoHeadlessUIAdapter.class)
-public class MainJFrame extends JFrame {
+final class MainJFrame extends JFrame {
 
     private JButton newIdentityButton;
 

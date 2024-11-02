@@ -13,6 +13,13 @@ Bienvenido a PicoAuth, un mini sistema de autenticación online.
 | user-interface.main-frame.width  | 800               | Ancho del diálogo cuando arranca la aplicación |
 | user-interface.main-frame.height | 600               | Alto del diálogo cuando arranca la aplicación  |
 
+
+## Para ejecutar la aplicación
+
+```bash
+./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="-Djava.awt.headless=false"
+```
+
 ## Estado del Proyecto
 
 Actualmente, el proyecto se encuentra en desarrollo y no existe una versión estable.
