@@ -32,6 +32,9 @@
                 <configuration>
                     <skip>false</skip>
                     <mainClass>io.github.danuser2018.picoauth.client.PicoAuthClientApplication</mainClass>
+                    <jvmArguments>
+                        -Djava.awt.headless=false
+                    </jvmArguments>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
