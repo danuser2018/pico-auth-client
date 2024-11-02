@@ -5,19 +5,19 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class UIServiceTest {
+public class UIServiceImplTest {
 
-    private UIService uiService;
+    private UIServiceImpl uiServiceImpl;
     private final StartUIPort startUIPort = Mockito.mock();
 
     @BeforeEach
     void beforeTest() {
-        uiService = new UIService(startUIPort);
+        uiServiceImpl = new UIServiceImpl(startUIPort);
     }
 
     @Test
     void testStartUI() {
-        uiService.startUI();
+        uiServiceImpl.startUI();
         Mockito.verify(startUIPort).startUI();
     }
 }

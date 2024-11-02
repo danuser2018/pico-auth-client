@@ -13,7 +13,7 @@ import java.awt.*;
 @Slf4j
 @Repository
 @Conditional(HeadlessUIAdapter.Condition.class)
-public class HeadlessUIAdapter implements StartUIPort {
+final public class HeadlessUIAdapter implements StartUIPort {
 
     public static class Condition implements org.springframework.context.annotation.Condition {
         @Override
