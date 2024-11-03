@@ -1,42 +1,36 @@
 package io.github.danuser2018.picoauth.client.infra.swing.components;
 
-import io.github.danuser2018.picoauth.client.domain.ports.inbound.AddNewIdentityPort;
-import io.github.danuser2018.picoauth.client.infra.swing.NoHeadlessCondition;
+import io.github.danuser2018.picoauth.client.domain.models.Identity;
+import io.github.danuser2018.picoauth.client.domain.ports.inbound.NewIdentityPort;
 import jiconfont.icons.font_awesome.FontAwesome;
 import lombok.NonNull;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Conditional;
-import org.springframework.stereotype.Component;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.concurrent.CompletableFuture;
 
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.SOUTH;
 import static java.awt.Color.lightGray;
 import static java.awt.FlowLayout.RIGHT;
+import static java.lang.String.format;
 import static javax.swing.BorderFactory.createEmptyBorder;
+import static javax.swing.JOptionPane.showMessageDialog;
 import static jiconfont.swing.IconFontSwing.buildIcon;
 import static jiconfont.swing.IconFontSwing.buildImage;
 
-@Component
-@Conditional(NoHeadlessCondition.class)
-public class MainJFrame extends JFrame {
+@Slf4j
+public final class MainJFrame extends JFrame {
 
     @NonNull
-    private final AddNewIdentityPort addNewIdentityPort;
+    private final NewIdentityPort newIdentityPort;
 
     private JButton newIdentityButton;
 
-    public MainJFrame(
-            @Value("${user-interface.main-frame.width:800}") final int width,
-            @Value("${user-interface.main-frame.height:600}") final int height,
-            @NonNull AddNewIdentityPort addNewIdentityPort
-    ) {
+    public MainJFrame(final int width, final int height, final @NonNull NewIdentityPort newIdentityPort) {
         super("PicoAuth - Client");
 
-        this.addNewIdentityPort = addNewIdentityPort;
+        this.newIdentityPort = newIdentityPort;
 
         setIconImage(buildImage(FontAwesome.KEY, 16, lightGray));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -68,6 +62,34 @@ public class MainJFrame extends JFrame {
     }
 
     private void addNewIdentity() {
-        CompletableFuture.runAsync(addNewIdentityPort::addNewIdentity);
+        newIdentityPort.addNewIdentity()
+                .whenComplete(
+                        (identity, ex) -> {
+                            if (identity != null) {
+                                identityAdded(identity);
+                            } else {
+                                identityAddedFailed(ex);
+                            }
+                        }
+                );
+    }
+
+    private void identityAdded(Identity identity) {
+        log.info(format("Se ha añadido una nueva identidad: %s", identity.getUuid()));
+        SwingUtilities.invokeLater(() -> showMessageDialog(
+                        getRootPane(), format("Se ha creado la identidad %s", identity.getUuid())
+                )
+        );
+    }
+
+    private void identityAddedFailed(Throwable ex) {
+        log.error(format("Se ha producido un error creando una nueva identidad: %s %s",
+                ex.getClass(), ex.getMessage()), ex);
+
+        SwingUtilities.invokeLater(() -> showMessageDialog(
+                        getRootPane(),
+                        "Se ha producido un error creando la nueva identidad. Inténtelo más tarde"
+                )
+        );
     }
 }
